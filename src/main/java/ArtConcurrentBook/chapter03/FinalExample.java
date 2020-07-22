@@ -1,22 +1,25 @@
 package ArtConcurrentBook.chapter03;
 
 public class FinalExample {
-    int                 i;  //��ͨ����
-    final int           j;  //final����
+    int                 i;  // 普通变量
+    final int           j;  // final变量
     static FinalExample obj;
 
-    public FinalExample() { //���캯��
-        i = 1; //д��ͨ��
-        j = 2; //дfinal��
+    // 构造函数
+    public FinalExample() {
+        i = 1; // 写普通域
+        j = 2; // 写final域
     }
 
+    // 写线程A执行
     public static void writer() { //д�߳�Aִ��
         obj = new FinalExample();
     }
 
-    public static void reader() { //���߳�Bִ��
-        FinalExample object = obj; //����������
-        int a = object.i; //����ͨ��
-        int b = object.j; //��final��
+    // 读线程B执行
+    public static void reader() {
+        FinalExample object = obj; // 读对象引用
+        int a = object.i; // 读普通域
+        int b = object.j; // 读final域
     }
 }
