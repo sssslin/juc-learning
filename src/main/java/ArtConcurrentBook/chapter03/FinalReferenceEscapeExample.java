@@ -2,12 +2,12 @@ package ArtConcurrentBook.chapter03;
 
 public class FinalReferenceEscapeExample {
 
-    final int                          i;
+    final int i;
     static FinalReferenceEscapeExample obj;
 
     public FinalReferenceEscapeExample() {
-        i = 1; //1дfinal��
-        obj = this; //2 this�����ڴˡ��ݳ���
+        i = 1; // 1写final域
+        obj = this; //2 this引用在此溢出
     }
 
     public static void writer() {
