@@ -5,6 +5,10 @@ import java.util.LinkedList;
 
 /**
  * 6-16
+ * 这个类的提供的功能是
+ * 1、初始化线程池(创建好线程并存储)
+ * 2、释放连接(将连接放回到线程的末尾)
+ * 3、获取连接(从队列的头部获取连接)
  */
 public class ConnectionPool {
 
@@ -21,17 +25,17 @@ public class ConnectionPool {
     public void releaseConnection(Connection connection) {
         if (connection != null) {
             synchronized (pool) {
-                // ��Ӻ���Ҫ����֪ͨ�����������������ܹ���֪�����ӳ����Ѿ��黹��һ������
+                // 连接释放后需要进行通知，这样其他消费者能够感知到连接池已经归还了一个连接
                 pool.addLast(connection);
                 pool.notifyAll();
             }
         }
     }
 
-    // ��mills���޷���ȡ�����ӣ����᷵��null
+    // 在mills内无法获取到连接，将会返回null
     public Connection fetchConnection(long mills) throws InterruptedException {
         synchronized (pool) {
-            // ��ȫ��ʱ
+            // 完全超时
             if (mills <= 0) {
                 while (pool.isEmpty()) {
                     pool.wait();

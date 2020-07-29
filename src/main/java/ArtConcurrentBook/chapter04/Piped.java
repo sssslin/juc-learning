@@ -10,9 +10,11 @@ import java.io.PipedWriter;
 public class Piped {
 
     public static void main(String[] args) throws Exception {
+        // 管道输入/输出流 和 普通的文件输入/输出流 或者 网络输入/输出流 不同之处在于
+        // 它主要用于线程之间的数据
         PipedWriter out = new PipedWriter();
         PipedReader in = new PipedReader();
-        // ����������������������ӣ�������ʹ��ʱ���׳�IOException
+        // 将输出流和输入流进行连接，否则在使用时会抛出IOException
         out.connect(in);
 
         Thread printThread = new Thread(new Print(in), "PrintThread");
