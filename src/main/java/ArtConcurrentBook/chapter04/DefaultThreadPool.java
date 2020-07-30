@@ -8,6 +8,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 6-20
+ * 线程池的本质就是使用了一个线程安全的工作队列连接工作者线程和客户端线程，
+ * 客户端线程将任务放入工作队列后便返回，而工作者线程则不断地从工作者队列上
+ * 取出工作并执行。
  */
 public class DefaultThreadPool<Job extends Runnable> implements ThreadPool<Job> {
     // 线程池最大限制数
@@ -39,6 +42,8 @@ public class DefaultThreadPool<Job extends Runnable> implements ThreadPool<Job> 
             // 添加一个工作，然后进行通知
             synchronized (jobs) {
                 jobs.addLast(job);
+                // notify()必须放在同步代码块中，调用这个方法后，将会唤醒在该对象上调用wait()方法的线程，即
+                // worker实现中的jobs.wait()方法
                 jobs.notify();
             }
         }
