@@ -14,7 +14,10 @@ import java.util.concurrent.locks.Lock;
  */
 public class TwinsLockTest {
 
-    public void test() {
+    public static void main(String[] args) {
+        test();
+    }
+    public static void test() {
         final Lock lock = new TwinsLock();
         class Worker extends Thread {
             public void run() {
@@ -30,13 +33,13 @@ public class TwinsLockTest {
                 }
             }
         }
-        // ����10���߳�
+        // 启动10个线程
         for (int i = 0; i < 10; i++) {
             Worker w = new Worker();
             w.setDaemon(true);
             w.start();
         }
-        // ÿ��1�뻻��
+        // 每隔1秒换行
         for (int i = 0; i < 10; i++) {
             SleepUtils.second(1);
             System.out.println();
