@@ -7,8 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author junfeng.ling
  * @date 2020/8/4 9:47
- * @Description:细节分析在以下这篇博客
- * https://www.cnblogs.com/hongdada/p/6150699.html
+ * @Description:细节分析在以下这篇博客 https://www.cnblogs.com/hongdada/p/6150699.html
  */
 public class BounderBuffer {
 

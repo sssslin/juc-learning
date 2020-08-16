@@ -1,5 +1,6 @@
 package ArtConcurrentBook.chapter05;
 
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

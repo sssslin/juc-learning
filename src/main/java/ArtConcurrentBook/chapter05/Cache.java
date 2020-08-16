@@ -14,6 +14,7 @@ public class Cache {
     private static final Lock                   r   = rwl.readLock();
     private static final Lock                   w   = rwl.writeLock();
 
+    // 获取一个key对应的value
     public static final Object get(String key) {
         r.lock();
         try {
@@ -23,6 +24,7 @@ public class Cache {
         }
     }
 
+    // 设置key对应的value并返回旧的value
     public static final Object put(String key, Object value) {
         w.lock();
         try {
@@ -32,6 +34,7 @@ public class Cache {
         }
     }
 
+    // 清空所有的内容
     public static final void clear() {
         w.lock();
         try {
